@@ -1,20 +1,19 @@
+package Base;
 public class Grafo {
 
-    private Line lines[];
+    private Aresta arestas[];
     private Vertice vertices[];
 
     public void graphInit(int len) {
-
-        lines = new Line[len];
-
+        arestas = new Aresta[len];
     }
 
-    public Line[] getLines() {
-        return this.lines;
+    public Aresta[] getArestas() {
+        return this.arestas;
     }
 
-    public void setLines(Line[] lines) {
-        this.lines = lines;
+    public void setArestas(Aresta[] lines) {
+        this.arestas = lines;
     }
 
     public Vertice[] getVertices() {

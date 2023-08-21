@@ -1,12 +1,11 @@
-import java.util.Map;
+package Pratica;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.Stack;
 
-public class CaminhoGrafo {
+import Base.*;
 
-    Map<Vertice,Vertice> next;
-    Map<Vertice,Integer> value;
+public class CaminhoGrafo {
     static Grafo g = new Grafo();
 
     public static void buscaLargura(Vertice orig) {
@@ -19,10 +18,10 @@ public class CaminhoGrafo {
             Vertice atual = fila.remove();
             System.out.println("Vertice - " + atual.getNome());
 
-            for(int i=0;i<g.getLines().length;i++) {
+            for(int i=0;i<g.getArestas().length;i++) {
 
-                Line aux = g.getLines()[i];
-                if(aux.org.getNome().equals(atual.getNome())) fila.add(aux.dest);
+                Aresta aux = g.getArestas()[i];
+                if(aux.getInicio().getNome().equals(atual.getNome())) fila.add(aux.getDest());
 
             }
 
@@ -39,39 +38,39 @@ public class CaminhoGrafo {
             Vertice atual = fila.pop();
             System.out.println("Vertice - " + atual.getNome());
 
-            for(int i=0;i<g.getLines().length;i++) {
+            for(int i=0;i<g.getArestas().length;i++) {
 
-                Line aux = g.getLines()[i];
-                if(aux.org.getNome().equals(atual.getNome())) fila.add(aux.dest);
+                Aresta aux = g.getArestas()[i];
+                if(aux.getInicio().getNome().equals(atual.getNome())) fila.add(aux.getDest());
 
             }
 
         }
     }
-
+    //Avalia 
     public static boolean isAppointed() {
 
         boolean res = false;
         int count = 0;
 
-        for(int j=0;j<g.getLines().length;j++) {
+        for(int j=0;j<g.getArestas().length;j++) {
 
-            Line atual = g.getLines()[j];
-            Vertice org = atual.org;
-            Vertice dest = atual.dest;
+            Aresta atual = g.getArestas()[j];
+            Vertice org = atual.getInicio();
+            Vertice dest = atual.getDest();
 
-            for(int i=0;i<g.getLines().length;i++) {
+            for(int i=0;i<g.getArestas().length;i++) {
 
-                Line temp = g.getLines()[i];
-                Vertice orgT = temp.org;
-                Vertice destT = temp.dest;
+                Aresta temp = g.getArestas()[i];
+                Vertice orgT = temp.getInicio();
+                Vertice destT = temp.getDest();
 
                 if(orgT.getNome().equals(dest.getNome()) && destT.getNome().equals(org.getNome())) ++count;
 
             }
         }
 
-        if(count==g.getLines().length) res = true;
+        if(count==g.getArestas().length) res = true;
 
         return res;
     }
@@ -81,16 +80,16 @@ public class CaminhoGrafo {
         Vertice A = new Vertice("A");
         Vertice B = new Vertice("B");
         Vertice C = new Vertice("C");
-        Line ab = new Line(A ,B, 0);
-        Line ba = new Line(B, A, 0);
-        Line bc = new Line(B, C, 0);
-        Line cb = new Line(C, B, 0);
+        Aresta ab = new Aresta(A ,B, 0);
+        Aresta ba = new Aresta(B, A, 0);
+        Aresta bc = new Aresta(B, C, 0);
+        Aresta cb = new Aresta(C, B, 0);
 
         Vertice[] vertices = {A, B, C};
-        Line[] lines = {ab, bc, ba, cb};
+        Aresta[] lines = {ab, bc, ba, cb};
 
         g.setVertices(vertices);
-        g.setLines(lines);
+        g.setArestas(lines);
         
         System.out.println(CaminhoGrafo.isAppointed());
     }

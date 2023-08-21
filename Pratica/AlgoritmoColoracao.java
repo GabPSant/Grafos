@@ -1,3 +1,4 @@
+package Pratica;
 import java.util.LinkedList;
 import java.util.Arrays;
 import java.util.Iterator;
