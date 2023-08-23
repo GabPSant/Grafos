@@ -76,20 +76,13 @@ public class CaminhoGrafo {
     }
 
     public static void main(String[] args) {
-
-        Vertice A = new Vertice("A");
-        Vertice B = new Vertice("B");
-        Vertice C = new Vertice("C");
-        Aresta ab = new Aresta(A ,B, 0);
-        Aresta ba = new Aresta(B, A, 0);
-        Aresta bc = new Aresta(B, C, 0);
-        Aresta cb = new Aresta(C, B, 0);
-
-        Vertice[] vertices = {A, B, C};
-        Aresta[] lines = {ab, bc, ba, cb};
-
-        g.setVertices(vertices);
-        g.setArestas(lines);
+        g.setVertice(new Vertice("A"));
+        g.setVertice(new Vertice("B"));
+        g.setVertice(new Vertice("C"));
+        g.setAresta(new Aresta(g.getVertice("A"), g.getVertice("B")));
+        g.setAresta(new Aresta(g.getVertice("B"), g.getVertice("A")));
+        g.setAresta(new Aresta(g.getVertice("B"), g.getVertice("C")));
+        g.setAresta(new Aresta(g.getVertice("C"), g.getVertice("B")));
         
         System.out.println(CaminhoGrafo.isAppointed());
     }

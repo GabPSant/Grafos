@@ -1,4 +1,4 @@
-package Atividade1;
+package Atividades;
 import Base.*;
 
 public class RedePetri{
