@@ -58,7 +58,7 @@ public class Grafo {
         return this.vertices;
     }
 
-    public void setVertice(Vertice v) {// Resolver o problema do NullPointer
+    public void setVertice(Vertice v) {
         for(Vertice ve: vertices) if(ve==v) return;
         vertices.add(v);
     }
