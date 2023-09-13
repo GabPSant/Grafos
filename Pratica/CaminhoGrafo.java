@@ -11,6 +11,7 @@ public class CaminhoGrafo {
 
         Queue<Vertice> fila = new LinkedList<>();
         fila.add(orig);
+        System.out.println("\nBusca por largura: ");
 
         while(fila.size() > 0) {
 
@@ -27,10 +28,10 @@ public class CaminhoGrafo {
         }
     }
 
-        public static void buscaProfundidade(Vertice orig) {
-
+    public static void buscaProfundidade(Vertice orig) {
         Stack<Vertice> fila = new Stack<>();
         fila.add(orig);
+        System.out.println("\nBusca por profundidade: ");
 
         while(fila.size() > 0) {
 
@@ -83,5 +84,7 @@ public class CaminhoGrafo {
         g.setAresta(new Aresta(g.getVertice("B"), g.getVertice("C")));
         g.printGrafo();
         System.out.println(g.eNaoDirecional());
+        buscaLargura(g.getVertice("C"));
+        buscaProfundidade(g.getVertice("A"));
     }
 }
