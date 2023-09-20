@@ -1,13 +1,14 @@
-package Pratica;
+package Atividades;
 import java.util.LinkedList;
 import java.util.Arrays;
 import java.util.Iterator;
 
 public class AlgoritmoColoracao {
-    private int v; // Número de vertices
+    private Integer v; // Número de vertices
     private LinkedList<Integer> adj[]; // Lista adjacente
+    private int contador = 0;
 
-    AlgoritmoColoracao(int v){
+    AlgoritmoColoracao(Integer v){
         this.v = v;
         adj = new LinkedList[v];
         for(int i = 0; i<v; i++)
@@ -19,7 +20,7 @@ public class AlgoritmoColoracao {
         adj[w].add(v);
     }
 
-    void verticesColoridosPossiveis(){
+    void verticesColoridos(){
         int resultado[] = new int[this.v];
 
         Arrays.fill(resultado, -1);
@@ -37,7 +38,10 @@ public class AlgoritmoColoracao {
 
             int x;
             for(x = 0; x<this.v; x++){
-                if(coresPosiveis[x]) break;
+                if(coresPosiveis[x]){
+                    contador++;
+                    break;
+                }
             }
 
             resultado[i] = x;
@@ -47,6 +51,10 @@ public class AlgoritmoColoracao {
         for(int i = 0; i<this.v; i++){
             System.out.printf("Vertice %d ---> Cor %d\n", i, resultado[i]);
         }
+        System.out.println("Cores necessários: "+ contador);
+    }
+    void verticesColoridosPosiveis(int n){
+
     }
 
     public static void main(String[] args){
@@ -59,8 +67,9 @@ public class AlgoritmoColoracao {
         grafo.adicionarAresta(3, 4);
         grafo.adicionarAresta(4, 5);
         grafo.adicionarAresta(5,3);
+        grafo.adicionarAresta(2, 5);
         System.out.println("Coloração do grafo");
-        grafo.verticesColoridosPossiveis();
+        grafo.verticesColoridos();
     }
 }
 

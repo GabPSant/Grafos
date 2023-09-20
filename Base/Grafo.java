@@ -1,17 +1,19 @@
 package Base;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Grafo {
-    private ArrayList<Aresta> arestas = new ArrayList<>();
-    private ArrayList<Vertice> vertices = new ArrayList<>();
+    private LinkedList<Aresta> arestas = new LinkedList<>();
+    private LinkedList<Vertice> vertices = new LinkedList<>();
     private boolean direcional = false;//defini que o grafo não é direcional (se uma aresta for criado, o caminho existe para ambos)
+
+    public boolean getDirecional(){ return direcional;}
 
     public void eDirecional(){// Caso queira que o grafo seja direcional, é só usar essa função antes de definir as arestas
         this.direcional = true;
     }
 
     // Serve para checar se o grafo é não direcional
-    public boolean eNaoDirecional(){
+    public boolean checarNaoDirecional(){
         if(arestas.size()%2 != 0 || direcional) return false;
         Aresta[] arrayTeste = arestas.toArray(new Aresta[0]);
         int contador = 0;
@@ -27,24 +29,28 @@ public class Grafo {
         return (contador == arrayTeste.length/2)?true:false;
     }
 
-    public void printGrafo(){
+    public void printVertices(){
         if(arestas.isEmpty() || vertices.isEmpty()) return;
-        System.out.print("Lista de vertices: ");
-        for(Vertice v: vertices) System.out.printf("%s ", v.getNome());
-        System.out.println("\n\nLista de arestas:");
-        for(Aresta a: arestas) System.out.printf("  %s --> %s\n", a.getInicio().getNome(), a.getDest().getNome());
+        System.out.print("Lista de vertices: \n");
+        for(Vertice v: vertices) System.out.printf("%s \n", v.getNome());
+        System.out.println();
     }
 
-    public ArrayList<Aresta> getArestas() {
+    public LinkedList<Aresta> getArestas() {
         return this.arestas;
     }
-    public Vertice getVertice(String s){
-        Vertice vertice = null;
-        for(Vertice v: vertices)
-            if(v.getNome() == s) vertice = v;
-        return vertice;
-    }
-    public void setAresta(Aresta a) {
+
+    public Aresta getAresta(String s1, String s2){
+        Aresta aresta = null;
+        for(Aresta a: arestas)
+            if(a.getInicio().getNome() == s1 && a.getDest().getNome() == s2) aresta = a;
+    
+        return aresta;
+    }   
+
+    public void setAresta(String s1, String s2) {
+        if(getVertice(s1) == null || getVertice(s2) == null) return;
+        Aresta a = new Aresta(getVertice(s1), getVertice(s2));
         for(Aresta ar: arestas) if(ar == a) return;
         arestas.add(a);
         if(!direcional){
@@ -54,11 +60,19 @@ public class Grafo {
         }
     }
 
-    public ArrayList<Vertice> getVertices() {
+    public LinkedList<Vertice> getVertices() {
         return this.vertices;
     }
 
-    public void setVertice(Vertice v) {
+    public Vertice getVertice(String s){
+        Vertice vertice = null;
+        for(Vertice v: vertices)
+            if(v.getNome() == s) vertice = v;
+        return vertice;
+    }
+
+    public void setVertice(String s) {
+        Vertice v = new Vertice(s);
         for(Vertice ve: vertices) if(ve==v) return;
         vertices.add(v);
     }
