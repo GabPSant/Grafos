@@ -33,13 +33,15 @@ public class AlgoritmoColoracao {
             Iterator<Integer> it = adj[i].iterator();
             while(it.hasNext()){
                 int index = it.next();
-                if(resultado[index] != -1) coresPosiveis[resultado[index]] = false;
+                if(resultado[index] != -1){
+                    contador++;
+                    coresPosiveis[resultado[index]] = false;
+                }
             }
 
             int x;
             for(x = 0; x<this.v; x++){
                 if(coresPosiveis[x]){
-                    contador++;
                     break;
                 }
             }
@@ -51,7 +53,7 @@ public class AlgoritmoColoracao {
         for(int i = 0; i<this.v; i++){
             System.out.printf("Vertice %d ---> Cor %d\n", i, resultado[i]);
         }
-        System.out.println("Cores necessários: "+ contador);
+        System.out.println("Cores necessários: "+ ((contador%2 == 0)?contador/2-1:contador/2));
     }
     void verticesColoridosPosiveis(int n){
 
@@ -62,6 +64,8 @@ public class AlgoritmoColoracao {
         grafo.adicionarAresta(0, 1);
         grafo.adicionarAresta(0, 2);
         grafo.adicionarAresta(1, 2);
+        grafo.adicionarAresta(0, 4);
+        grafo.adicionarAresta(0,5);
         grafo.adicionarAresta(1, 3);
         grafo.adicionarAresta(2, 3);
         grafo.adicionarAresta(3, 4);
