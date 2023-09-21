@@ -8,19 +8,19 @@ public class AlgoritmoColoracao {
     private LinkedList<Integer> adj[]; // Lista adjacente
     private int contador = 0;
 
-    AlgoritmoColoracao(Integer v){
+    public AlgoritmoColoracao(Integer v){
         this.v = v;
         adj = new LinkedList[v];
         for(int i = 0; i<v; i++)
             adj[i] = new LinkedList();
     }
     // Conecta duas regiões do mapa
-    void adicionarAresta(int v, int w){
+    public void adicionarAresta(int v, int w){
         adj[v].add(w);
         adj[w].add(v);
     }
 
-    void verticesColoridos(){
+    public void verticesColoridos(){
         int resultado[] = new int[this.v];
 
         Arrays.fill(resultado, -1);
@@ -34,7 +34,6 @@ public class AlgoritmoColoracao {
             while(it.hasNext()){
                 int index = it.next();
                 if(resultado[index] != -1){
-                    contador++;
                     coresPosiveis[resultado[index]] = false;
                 }
             }
@@ -52,11 +51,9 @@ public class AlgoritmoColoracao {
         //O for serve para printar o resultado
         for(int i = 0; i<this.v; i++){
             System.out.printf("Vertice %d ---> Cor %d\n", i, resultado[i]);
+            if(contador<resultado[i]) contador = resultado[i];
         }
-        System.out.println("Cores necessários: "+ ((contador%2 == 0)?contador/2-1:contador/2));
-    }
-    void verticesColoridosPosiveis(int n){
-
+        System.out.println("Cores necessárias: "+ (contador+1));
     }
 
     public static void main(String[] args){
@@ -71,7 +68,7 @@ public class AlgoritmoColoracao {
         grafo.adicionarAresta(3, 4);
         grafo.adicionarAresta(4, 5);
         grafo.adicionarAresta(5,3);
-        grafo.adicionarAresta(2, 5);
+        //grafo.adicionarAresta(2, 5);
         System.out.println("Coloração do grafo");
         grafo.verticesColoridos();
     }

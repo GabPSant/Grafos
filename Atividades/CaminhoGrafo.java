@@ -2,7 +2,6 @@ package Atividades;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.Stack;
-import java.util.HashMap;
 import Base.*;
 
 public class CaminhoGrafo {
@@ -69,28 +68,22 @@ public class CaminhoGrafo {
         System.out.println();
     }
 
-    public void caminhoEuler(){// Como eu crio um algoritmo para avaliar cada elemento e encontrar se é possível encontrar se
-        //é possível caminhar de um vertice para cada vertice do grafo
-        int u  = 0;// Encontrar o vertice com 
-        
-    }
-
     public static void main(String[] args) {
         Grafo g = new Grafo();
         g.setVertice("A");
         g.setVertice("B");
         g.setVertice("C");
-        //g.eDirecional();
+        g.eDirecional();
         g.setAresta("A", "B");
         g.setAresta("B", "C");
         g.setAresta("A", "C");
         g.setAresta("D", "B");
-        g.printVertices();
+        //g.printVertices();
 
         CaminhoGrafo caminho = new CaminhoGrafo(g);
-        caminho.caminhosPossiveis();
+        //caminho.caminhosPossiveis();
         System.out.println(g.checarNaoDirecional());
-        //caminho.buscaLargura(g.getVertice("C"));
+        caminho.buscaLargura(g.getVertice("C"));
         //caminho.buscaProfundidade(g.getVertice("A"));
     }
 }
